@@ -6,6 +6,34 @@ return {
         { "antosha417/nvim-lsp-file-operations", config = true },
     },
     config = function()
+        -- LSP keymaps (applied to all LSP clients via LspAttach)
+        vim.api.nvim_create_autocmd("LspAttach", {
+            callback = function(ev)
+                local buf = ev.buf
+                local map = vim.keymap.set
+                local function opts(desc)
+                    return { buffer = buf, noremap = true, silent = true, desc = desc }
+                end
+
+                map("n", "gR", "<cmd>FzfLua lsp_references<CR>", opts("Show LSP references"))
+                map("n", "gD", vim.lsp.buf.declaration, opts("Go to declaration"))
+                map("n", "gd", "<cmd>FzfLua lsp_definitions<CR>", opts("Show LSP definitions"))
+                map("n", "gi", "<cmd>FzfLua lsp_implementations<CR>", opts("Show LSP implementations"))
+                map("n", "gt", "<cmd>FzfLua lsp_typedefs<CR>", opts("Show LSP type definitions"))
+                map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts("See available code actions"))
+                map("n", "<leader>rn", vim.lsp.buf.rename, opts("Smart rename"))
+                map("n", "<leader>D", "<cmd>FzfLua diagnostics_document<CR>", opts("Show buffer diagnostics"))
+                map("n", "<leader>sd", vim.diagnostic.open_float, opts("Show line diagnostics"))
+                map("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, opts("Go to previous diagnostic"))
+                map("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, opts("Go to next diagnostic"))
+                map("n", "K", vim.lsp.buf.hover, opts("Show documentation under cursor"))
+                map("n", "<leader>rs", function()
+                    vim.lsp.stop_client(vim.lsp.get_clients())
+                    vim.cmd("e")
+                end, opts("Restart LSP"))
+            end,
+        })
+
         -- import cmp-nvim-lsp plugin (for capabilities)
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
