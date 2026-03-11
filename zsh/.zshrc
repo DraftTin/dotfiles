@@ -13,11 +13,10 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-source ~/.bashrc
-source ~/.bash_profile
-source ~/.zshenv
-
-[ -f "/Users/ningyuheng/.ghcup/env" ] && source "/Users/ningyuheng/.ghcup/env" # ghcup-envexport HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+[ -f "/Users/ningyuheng/.ghcup/env" ] && source "/Users/ningyuheng/.ghcup/env"
+. "$HOME/.cargo/env"
+export CMAKE_ROOT="/Applications/CMake.app/Contents/bin"
+export PATH=$CMAKE_ROOT:$HOME/.local/bin:$PATH
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/
 
 
@@ -33,7 +32,7 @@ export NVM_DIR="$HOME/.nvm"
 source <(fzf --zsh)
 alias invs='nvim $(fzf -m --preview="cat {}")'
 
-# make an alias for nvim alias v="nvim"
+# Alias for nvim
 alias v="nvim"
 
 # Vim-mode
@@ -65,16 +64,7 @@ ObsidianVault="/Users/ningyuheng/Library/Mobile\ Documents/com~apple~CloudDocs/O
 alias dn="$ObsidianVault/scripts/create-daily-note.sh"
 
 # pyenv
-# echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-# echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-# echo 'eval "$(pyenv init - zsh)"' >> ~/.zshrc
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
 
-
-# OpenClaw Completion
-# Initialize Zsh completions
-# autoload -Uz compinit
-# compinit
-# source <(openclaw completion --shell zsh)
