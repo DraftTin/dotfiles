@@ -1,12 +1,13 @@
 # Dotfiles
 
-Personal config files for nvim, tmux, and Claude Code.
+Personal config files for nvim, tmux, Kitty, and Claude Code.
 
 ## Structure
 
 ```
 dotfiles/
   nvim/             → ~/.config/nvim
+  kitty/            → ~/.config/kitty
   tmux/             → ~/.tmux.conf (tmux/tmux.conf)
   claude/           → ~/.claude/settings.json
 ```
@@ -17,6 +18,7 @@ dotfiles/
 git clone https://github.com/DraftTin/dotfiles.git ~/dotfiles
 
 ln -s ~/dotfiles/nvim ~/.config/nvim
+ln -s ~/dotfiles/kitty ~/.config/kitty
 ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 mkdir -p ~/.claude && ln -s ~/dotfiles/claude/settings.json ~/.claude/settings.json
 ```
