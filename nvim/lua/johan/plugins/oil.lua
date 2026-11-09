@@ -22,6 +22,12 @@ return {
                 -- Optional: You can still keep the functionality by mapping them elsewhere
                 -- ["<C-x>"] = "actions.select_split",
             },
+            view_options = {
+                sort = {
+                    { "type", "asc" },  -- Keeps directories at the top
+                    { "mtime", "desc" }, -- Sorts files by newest modification time first
+                },
+            },
         })
 
         vim.keymap.set("n", "-", "<cmd>Oil<CR>")
