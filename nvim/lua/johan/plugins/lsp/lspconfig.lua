@@ -125,16 +125,6 @@ return {
                     },
                 },
             },
-            rust_analyzer = {
-                capabilities = capabilities,
-                settings = {
-                    cargo = {
-                        allFeatures = true,
-                        loadOutDirsFromCheck = true,
-                    },
-                    procMacro = { enable = true },
-                },
-            },
         }
 
         -- register and enable all servers via Neovim 0.11 API
