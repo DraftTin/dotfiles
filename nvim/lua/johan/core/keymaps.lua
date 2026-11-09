@@ -47,6 +47,18 @@ keymap.set("n", "<leader>cp", function()
     vim.fn.setreg("+", vim.fn.expand("%:p"))
     vim.notify("Copied: " .. vim.fn.expand("%:p"))
 end, { desc = "Copy full file path to clipboard" })
+
+-- show the current file path and copy it to the clipboard
+vim.api.nvim_create_user_command("Path", function()
+    local path = vim.fn.expand("%:p"):gsub("^oil://", "")
+    if path == "" then
+        vim.notify("No file in this buffer", vim.log.levels.WARN)
+        return
+    end
+    vim.fn.setreg("+", path)
+    vim.notify(path .. "  (copied)")
+end, { desc = "Show the current file path and copy it" })
+
 vim.api.nvim_set_keymap("n", "gj", "gj", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gk", "gk", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gh", "g0", { noremap = true, silent = true })
